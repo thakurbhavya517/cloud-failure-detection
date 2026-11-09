@@ -16,3 +16,7 @@ pytest>=7.4.0
 # Visualization & reporting
 matplotlib>=3.8.0
 seaborn>=0.13.0
+
+# Interactive web dashboard
+streamlit>=1.30.0
+plotly>=5.18.0

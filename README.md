@@ -330,6 +330,13 @@ python -c "import torch, sklearn, pandas, numpy, yaml; print('All core dependenc
 
 ## 15. How to Run the Project
 
+### Launch the Interactive Web Dashboard
+An interactive Streamlit research dashboard is available in `dashboard/` for visual telemetry inspection, live CPU inference, and model benchmarking:
+```powershell
+streamlit run dashboard/app.py
+```
+For detailed documentation on supported input CSV schemas, pages, and architecture, see [dashboard/README.md](dashboard/README.md).
+
 ### Generate Publication Figures
 To reproduce all four publication figures in `reports/figures/`:
 ```powershell
