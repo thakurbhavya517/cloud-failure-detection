@@ -1,6 +1,6 @@
 """Main entry point for Cloud Failure Detection Research Dashboard.
 
-Streamlit multi-page application integrating genuine models, real telemetry data,
+Streamlit multi-page application integrating aligned research models, real telemetry data,
 and audited experimental artifacts.
 """
 
@@ -74,7 +74,25 @@ st.markdown(
 # Sidebar Navigation
 with st.sidebar:
     st.markdown('<div class="sidebar-brand">☁️ Cloud Failure ML</div>', unsafe_allow_html=True)
-    st.caption("Container Telemetry Research Dashboard • v2.4")
+    st.caption("Target Paper Aligned Dashboard • v3.1")
+    st.markdown("---")
+
+    # Explicit Dataset Mode Selector (Task 3)
+    st.markdown("### 🗄️ Dataset Selector")
+    current_mode = st.session_state.get("dataset_mode", "Local Borg 2011 — Available")
+    default_idx = 0 if "2011" in current_mode else 1
+    dataset_mode = st.radio(
+        "Active Dataset Context",
+        [
+            "Local Borg 2011 — Available",
+            "Google Cluster Trace 2019 — Access pending",
+        ],
+        index=default_idx,
+        key="dataset_mode_selector",
+        help="Select active dataset context. Local Borg 2011 is available on disk; Google 2019 access is pending BigQuery extraction approval.",
+    )
+    st.session_state["dataset_mode"] = dataset_mode
+
     st.markdown("---")
 
     nav_selection = st.radio(
@@ -94,18 +112,32 @@ with st.sidebar:
 
     # Operational Environment Information
     st.markdown("### Operational Environment")
-    st.markdown(
-        """
-        <div class="sidebar-status-box">
-            <b>Compute Engine:</b> CPU Execution<br>
-            <b>Virtual Env:</b> Python 3.12 (.venv)<br>
-            <b>Validation Partition:</b> 657 Windows<br>
-            <b>Holdout Status:</b> Quarantined & Sealed<br>
-            <b>Dataset:</b> Google Borg 2011 Trace
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    if dataset_mode == "Local Borg 2011 — Available":
+        st.markdown(
+            """
+            <div class="sidebar-status-box">
+                <b>Compute Engine:</b> CPU Execution<br>
+                <b>Target Architecture:</b> W=15, d=42<br>
+                <b>Active Models:</b> 128h LSTM & 64d Trans<br>
+                <b>Validation Partition:</b> 724 Windows (30m Embargo)<br>
+                <b>Dataset:</b> Google Borg 2011 (Available)
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown(
+            """
+            <div class="sidebar-status-box" style="border-color: #f59e0b; background-color: rgba(245, 158, 11, 0.1);">
+                <b>Compute Engine:</b> CPU Execution<br>
+                <b>Dataset:</b> Google Cluster Trace 2019<br>
+                <b>Status:</b> ⏳ ACCESS PENDING<br>
+                <b>Source:</b> BigQuery clusterdata_2019_a<br>
+                <b>Models:</b> Ingestion Authorization Required
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
     st.markdown("---")
     st.markdown(

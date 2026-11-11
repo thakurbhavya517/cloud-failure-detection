@@ -149,3 +149,4 @@ For custom predictions in the **Prediction Playground**, uploaded CSVs must cont
 1. **No Data Leakage:** The dashboard strictly accesses only `data/processed/phase7c/val_metadata.csv`, `X_val.npy`, and `y_val.npy`. Quarantined holdouts (`data/processed/confirmatory/`) and final test arrays (`X_test.npy`) are protected and inaccessible.
 2. **No Model Retraining:** Models are loaded strictly in evaluation mode (`model.eval()`) with frozen weights.
 3. **No Fabricated Outputs:** All displayed metrics, probabilities, and confusion matrices are either calculated directly from model weights or loaded from audited Phase 8 JSON reports.
+

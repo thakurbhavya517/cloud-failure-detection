@@ -1,6 +1,7 @@
 # Raw research datasets
 /data/raw/
 *.parquet
+*.zip
 
 # Python bytecode and virtual environment
 __pycache__/
